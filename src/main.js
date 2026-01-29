@@ -166,12 +166,7 @@ const setupScrollAnimation = () => {
 
     const isMobile = window.innerWidth <= 768;
 
-    // MOBILE: Video handles everything. No JS logic needed.
-    if (isMobile) {
-        return;
-    }
-
-    // DESKTOP: ScrollTrigger Animation
+    // DESKTOP & MOBILE: ScrollTrigger Animation
     // Main Timeline
     const tl = gsap.timeline({
         scrollTrigger: {
@@ -211,7 +206,7 @@ const setupScrollAnimation = () => {
                 if (progress > 0.70) {
                     const phase3Progress = (progress - 0.70) / 0.30;
 
-                    // Dark tint on canvas
+                    // Dark tint on canvas (or video)
                     canvasOverlay.style.background = `rgba(0, 0, 0, ${0.5 * phase3Progress})`;
 
                     // Fade in centered text
@@ -237,13 +232,21 @@ const setupScrollAnimation = () => {
         }
     });
 
-    // Animate frames
-    tl.to(imageSequence, {
-        frame: frameCount - 1,
-        snap: "frame",
-        ease: "none",
-        onUpdate: renderFrame
-    });
+    // Animate frames (DESKTOP ONLY)
+    // Mobile uses video, so we skip the frame scrubbing to save performance
+    if (!isMobile) {
+        tl.to(imageSequence, {
+            frame: frameCount - 1,
+            snap: "frame",
+            ease: "none",
+            onUpdate: renderFrame
+        });
+    } else {
+        // MOBILE DUMMY TWEEN
+        // We need the timeline to have "length"/duration even without frame scrubbing
+        // so that the scroll distance (+6000px) still maps loosely to the text animations.
+        tl.to({}, { duration: 1 });
+    }
 };
 
 // Start Sequence
