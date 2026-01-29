@@ -2555,37 +2555,21 @@ select:focus {
     background: #000;
   }
 
-  /* Phase 1 Top - Visible Initially, Fades Out */
+  /* Phase 1 Top - HIDDEN on mobile */
   .hero-text-top {
-    display: block !important;
-    opacity: 1;
-    /* Let JS control this */
-    position: absolute !important;
-    top: 15% !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    width: 90% !important;
-    text-align: center !important;
+    display: none !important;
   }
 
-  /* Phase 1 Bottom - Visible Initially, Fades Out */
+  /* Phase 1 Bottom - HIDDEN on mobile */
   .hero-text-bottom {
-    display: block !important;
-    opacity: 1;
-    /* Let JS control this */
-    position: absolute !important;
-    bottom: 10% !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    width: 90% !important;
-    text-align: center !important;
+    display: none !important;
   }
 
-  /* Phase 3 Final - Hidden Initially, Fades In */
+  /* Phase 3 Final - VISIBLE on mobile */
   .hero-text-final {
     display: block !important;
-    opacity: 0;
-    /* Let JS control this */
+    opacity: 1 !important;
+    /* Always visible */
     position: absolute !important;
     top: 50% !important;
     left: 50% !important;
@@ -2595,10 +2579,9 @@ select:focus {
     z-index: 20;
   }
 
-  /* Logo - Scaled Down */
+  /* Logo - HIDDEN on mobile */
   .hero-logo-center {
-    display: block !important;
-    transform: translate(-50%, -50%) scale(0.6) !important;
+    display: none !important;
   }
 
   /* Button Alignment - Side by Side (Row) */
