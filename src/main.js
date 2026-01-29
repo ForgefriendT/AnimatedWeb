@@ -158,8 +158,6 @@ const preloadImages = () => {
 const setupScrollAnimation = () => {
     if (!canvas) return;
 
-    let mm = gsap.matchMedia();
-
     const textTop = document.getElementById('hero-text-top');
     const textBottom = document.getElementById('hero-text-bottom');
     const textFinal = document.getElementById('hero-text-final');
@@ -167,8 +165,10 @@ const setupScrollAnimation = () => {
     const header = document.querySelector('.site-header');
     const centerLogo = document.getElementById('hero-logo-center');
 
+    const isMobile = window.innerWidth <= 768;
+
     // MOBILE: Show Phase 3 immediately, no scroll animation
-    mm.add("(max-width: 768px)", () => {
+    if (isMobile) {
         // Hide Phase 1 content
         if (textTop) textTop.style.display = 'none';
         if (textBottom) textBottom.style.display = 'none';
@@ -190,97 +190,81 @@ const setupScrollAnimation = () => {
             canvasOverlay.style.background = 'rgba(0, 0, 0, 0.5)';
         }
 
-        return () => {
-            // Cleanup: reset styles if needed when switching back to desktop
-            if (textTop) textTop.style.display = '';
-            if (textBottom) textBottom.style.display = '';
-            if (centerLogo) centerLogo.style.display = '';
-        };
-    });
+        return; // Exit early for mobile
+    }
 
     // DESKTOP: Original frame-by-frame animation
-    mm.add("(min-width: 769px)", () => {
-        // Main Timeline
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: ".hero-sequence",
-                start: "top top",
-                end: "+=6000", // Extended significantly - stays much longer
-                pin: true,
-                scrub: 0.5,
-                onUpdate: (self) => {
-                    const progress = self.progress;
+    // Main Timeline
+    const tl = gsap.timeline({
+        scrollTrigger: {
+            trigger: ".hero-sequence",
+            start: "top top",
+            end: "+=6000", // Extended significantly - stays much longer
+            pin: true,
+            scrub: 0.5,
+            onUpdate: (self) => {
+                const progress = self.progress;
 
-                    // Phase 1 → 2: Fade out split text AND center logo (0% - 15%)
-                    if (progress < 0.1) {
-                        const fadeProgress = progress / 0.1;
-                        const currentOpacity = Math.max(0, 1 - fadeProgress);
+                // Phase 1 → 2: Fade out split text AND center logo (0% - 15%)
+                if (progress < 0.1) {
+                    const fadeProgress = progress / 0.1;
+                    const currentOpacity = Math.max(0, 1 - fadeProgress);
 
-                        if (textTop) {
-                            textTop.style.opacity = currentOpacity;
+                    if (textTop) {
+                        textTop.style.opacity = currentOpacity;
+                    }
+                    if (textBottom) {
+                        textBottom.style.opacity = currentOpacity;
+                    }
+                    if (textTop) textTop.style.animation = 'none';
+                    if (textBottom) textBottom.style.animation = 'none';
+                    if (centerLogo) {
+                        centerLogo.style.opacity = currentOpacity;
+                        centerLogo.style.animation = 'none';
+                    }
+                } else {
+                    if (textTop) textTop.style.opacity = 0;
+                    if (textBottom) textBottom.style.opacity = 0;
+                    if (centerLogo) centerLogo.style.opacity = 0;
+                }
+
+                // Phase 2 → 3: Dark overlay, centered text, navbar (70% - 100%)
+                // Animation plays 0-70%, then hero stays in final state 30%
+                if (progress > 0.70) {
+                    const phase3Progress = (progress - 0.70) / 0.30;
+
+                    // Dark tint on canvas
+                    canvasOverlay.style.background = `rgba(0, 0, 0, ${0.5 * phase3Progress})`;
+
+                    // Fade in centered text
+                    if (phase3Progress > 0.1) {
+                        const textProgress = (phase3Progress - 0.1) / 0.9;
+                        textFinal.style.opacity = textProgress;
+                        if (textProgress > 0.3) {
+                            textFinal.classList.add('visible');
                         }
-                        if (textBottom) {
-                            textBottom.style.opacity = currentOpacity;
-                        }
-                        if (textTop) textTop.style.animation = 'none';
-                        if (textBottom) textBottom.style.animation = 'none';
-                        if (centerLogo) {
-                            centerLogo.style.opacity = currentOpacity;
-                            centerLogo.style.animation = 'none';
-                        }
-                    } else {
-                        if (textTop) textTop.style.opacity = 0;
-                        if (textBottom) textBottom.style.opacity = 0;
-                        if (centerLogo) centerLogo.style.opacity = 0;
                     }
 
-                    // Phase 2 → 3: Dark overlay, centered text, navbar (70% - 100%)
-                    if (progress > 0.70) {
-                        const phase3Progress = (progress - 0.70) / 0.30;
-
-                        // Dark tint on canvas
-                        if (canvasOverlay) {
-                            canvasOverlay.style.background = `rgba(0, 0, 0, ${0.5 * phase3Progress})`;
-                        }
-
-                        // Fade in centered text
-                        if (phase3Progress > 0.1) {
-                            const textProgress = (phase3Progress - 0.1) / 0.9;
-                            if (textFinal) textFinal.style.opacity = textProgress;
-                            if (textProgress > 0.3) {
-                                if (textFinal) textFinal.classList.add('visible');
-                            }
-                        }
-
-                        // Show navbar
-                        if (phase3Progress > 0.2) {
-                            if (header) header.classList.add('visible');
-                        }
-                    } else {
-                        if (canvasOverlay) canvasOverlay.style.background = 'rgba(0, 0, 0, 0)';
-                        if (textFinal) {
-                            textFinal.style.opacity = 0;
-                            textFinal.classList.remove('visible');
-                        }
-                        if (header) header.classList.remove('visible');
+                    // Show navbar
+                    if (phase3Progress > 0.2) {
+                        header.classList.add('visible');
                     }
+                } else {
+                    canvasOverlay.style.background = 'rgba(0, 0, 0, 0)';
+                    textFinal.style.opacity = 0;
+                    textFinal.classList.remove('visible');
+                    header.classList.remove('visible');
                 }
             }
-        });
+        }
+    });
 
-        // Animate frames
-        tl.to(imageSequence, {
-            frame: frameCount - 1,
-            snap: "frame",
-            ease: "none",
-            onUpdate: renderFrame
-        });
-
-        return () => {
-            // Cleanup timeline and ScrollTrigger
-            tl.kill();
-            if (tl.scrollTrigger) tl.scrollTrigger.kill();
-        };
+    // Animate frames (DESKTOP ONLY)
+    tl.to(imageSequence, {
+        frame: frameCount - 1,
+        snap: "frame",
+        ease: "none",
+        onUpdate: renderFrame
     });
 };
 
