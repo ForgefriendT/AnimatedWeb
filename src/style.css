@@ -2546,10 +2546,11 @@ select:focus {
     z-index: 0;
   }
 
-  /* Container - Allow ScrollTrigger Pinning */
+  /* Container - Static height for mobile (no scroll animation) */
   .hero-sequence {
     position: relative;
-    height: 100vh;
+    height: 100vh !important;
+    /* Static, not pinned */
     overflow: hidden;
     background: #000;
   }
