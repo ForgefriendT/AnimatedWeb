@@ -2370,3 +2370,116 @@ select:focus {
     transform: translate(-50%, -50%) scale(0.6) !important;
   }
 }
+
+/* ========================================
+   CRITICAL FIXES: BLACK SCREEN & Z-INDEX
+   ======================================== */
+
+/* 1. Prevent black flash - use skin tone background */
+#hero-canvas {
+  background-color: #E8DCC8 !important; /* Skin/Beige fallback */
+  transition: opacity 0.3s ease;
+}
+
+/* 2. Fix Logo vs Buttons Stacking */
+/* Ensure Buttons are ALWAYS clickable and above the logo */
+.hero-text-final {
+  z-index: 30 !important; /* Text and buttons must be highest */
+}
+
+.hero-actions {
+  position: relative !important;
+  z-index: 31 !important; /* Buttons even higher */
+}
+
+/* Logo sits behind the final text, but above the canvas */
+.hero-logo-center {
+  z-index: 10 !important; 
+}
+
+/* On Mobile: Ensure logo doesn't accidentally block clicks */
+@media (max-width: 768px) {
+  .hero-logo-center {
+    pointer-events: none !important; /* Let clicks pass through logo to buttons */
+    opacity: 0.4 !important; /* Fade logo slightly when text appears */
+  }
+  
+  /* Ensure canvas background is persistent */
+  .hero-sequence {
+    background-color: #E8DCC8 !important;
+  }
+}
+
+/* ========================================
+   FINAL MOBILE LAYOUT FIX: SEPARATED ZONES
+   ======================================== */
+
+@media (max-width: 768px) {
+  /* 1. VISIBILITY: Ensure animation is visible */
+  #hero-canvas {
+    opacity: 1 !important;
+    visibility: visible !important;
+    background-color: transparent !important; /* Let image show */
+  }
+
+  /* 2. LOGO: Move to TOP ZONE (User asked to fix logo behind buttons) */
+  .hero-logo-center {
+    top: 25% !important; /* Move high up */
+    left: 50% !important;
+    transform: translate(-50%, -50%) scale(0.6) !important;
+    z-index: 20 !important;
+    opacity: 1 !important; /* Ensure visible */
+    pointer-events: none; /* Don't block scrolls */
+  }
+
+  /* 3. TEXT & BUTTONS: Move to BOTTOM ZONE */
+  .hero-text-top {
+    display: none !important; /* Hide split text on mobile to simplify */
+  }
+
+  /* Use Bottom text for everything on mobile */
+  .hero-text-bottom {
+    top: auto !important;
+    bottom: 5% !important; /* Anchor to bottom */
+    height: auto !important;
+    width: 100% !important;
+    opacity: 1 !important;
+    z-index: 30 !important;
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
+    padding-bottom: 20px !important;
+    padding-top: 60px !important;
+  }
+  
+  /* Ensure content inside fits */
+  .hero-text-bottom .container {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+  }
+
+  .hero-title {
+    font-size: 1.8rem !important; /* Readable size */
+    margin-bottom: 5px !important;
+  }
+  
+  .hero-subtitle {
+    font-size: 0.9rem !important;
+    margin-bottom: 15px !important;
+  }
+
+  /* 4. BUTTONS: Stack vertically for mobile app feel */
+  .hero-actions {
+    flex-direction: column !important;
+    gap: 10px !important;
+    width: 100% !important;
+    max-width: 280px !important;
+    margin: 0 auto !important;
+  }
+
+  .hero-actions .btn {
+    width: 100% !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(255,255,255,0.2) !important;
+  }
+}
