@@ -1717,11 +1717,17 @@ footer a:hover {
   .scale-reveal,
   .glow-reveal,
   .slide-left,
-  .slide-right {
-    transition: none;
-    opacity: 1;
-    transform: none;
-    filter: none;
+  .slide-right,
+  .logo-text-nav,
+  .logo-left-nav,
+  .logo-right-nav,
+  .logo-center-nav,
+  .logo-nail-overlay-nav {
+    transition: none !important;
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
   }
 }
 
@@ -2650,5 +2656,80 @@ select:focus {
   .canvas-overlay {
     background: rgba(0, 0, 0, 0) !important;
     /* JS will animate this */
+  }
+
+  /* ========================================
+     MOBILE NAVBAR LOGO ANIMATIONS
+     ======================================== */
+
+  /* Floating animation for entire logo */
+  @keyframes floatLogo {
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-3px);
+    }
+  }
+
+  /* Subtle pulse for logo parts */
+  @keyframes logoPartPulse {
+
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    50% {
+      transform: scale(1.05);
+      opacity: 0.9;
+    }
+  }
+
+  /* Glow effect for the nail overlay */
+  @keyframes nailGlow {
+
+    0%,
+    100% {
+      text-shadow: 0 0 5px rgba(216, 207, 196, 0.3),
+        0 0 10px rgba(216, 207, 196, 0.2);
+    }
+
+    50% {
+      text-shadow: 0 0 10px rgba(216, 207, 196, 0.6),
+        0 0 20px rgba(216, 207, 196, 0.4),
+        0 0 30px rgba(216, 207, 196, 0.2);
+    }
+  }
+
+  /* Apply animations to navbar logo */
+  .logo-text-nav {
+    animation: floatLogo 3s ease-in-out infinite !important;
+  }
+
+  .logo-left-nav,
+  .logo-right-nav {
+    animation: logoPartPulse 4s ease-in-out infinite !important;
+  }
+
+  .logo-left-nav {
+    animation-delay: 0s !important;
+  }
+
+  .logo-right-nav {
+    animation-delay: 2s !important;
+  }
+
+  .logo-center-nav {
+    animation: logoPartPulse 3s ease-in-out infinite !important;
+    animation-delay: 1s !important;
+  }
+
+  .logo-nail-overlay-nav {
+    animation: nailGlow 2.5s ease-in-out infinite !important;
   }
 }
