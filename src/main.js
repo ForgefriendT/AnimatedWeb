@@ -167,25 +167,30 @@ const setupScrollAnimation = () => {
                 const progress = self.progress;
 
                 // Phase 1 → 2: Fade out split text AND center logo (0% - 15%)
+                // Phase 1 → 2: Fade out split text AND center logo (0% - 15%)
+                // ONLY ON DESKTOP - On mobile we want the UI to stay visible
+                const isMobile = window.innerWidth <= 768;
+
                 if (progress < 0.1) {
                     const fadeProgress = progress / 0.1;
                     const currentOpacity = Math.max(0, 1 - fadeProgress);
 
-                    if (textTop) {
+                    // On mobile, keep bottom text visible but fade logo out
+                    if (!isMobile && textTop) {
                         textTop.style.opacity = currentOpacity;
-                        textTop.style.animation = 'none';
                     }
-                    if (textBottom) {
+                    if (!isMobile && textBottom) {
                         textBottom.style.opacity = currentOpacity;
-                        textBottom.style.animation = 'none';
                     }
+                    if (textTop) textTop.style.animation = 'none';
+                    if (textBottom) textBottom.style.animation = 'none';
                     if (centerLogo) {
                         centerLogo.style.opacity = currentOpacity;
                         centerLogo.style.animation = 'none';
                     }
                 } else {
-                    if (textTop) textTop.style.opacity = 0;
-                    if (textBottom) textBottom.style.opacity = 0;
+                    if (!isMobile && textTop) textTop.style.opacity = 0;
+                    if (!isMobile && textBottom) textBottom.style.opacity = 0;
                     if (centerLogo) centerLogo.style.opacity = 0;
                 }
 

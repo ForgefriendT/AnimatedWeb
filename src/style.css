@@ -2440,3 +2440,37 @@ select:focus {
     font-weight: 600 !important;
   }
 }
+
+/* ========================================
+   CRITICAL ALIGNMENT & SCROLL FIX
+   ======================================== */
+
+@media (max-width: 768px) {
+  /* Fix Alignment - Ensure Text is Centered */
+  .hero-text-bottom {
+    text-align: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+  }
+  
+  .hero-text-bottom .container {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  /* Force Layout Stability */
+  body, html {
+    height: 100% !important;
+    overflow-x: hidden !important;
+    position: relative !important;
+  }
+  
+  /* Fix ScrollTrigger pinned container */
+  .pin-spacer {
+    height: 100vh !important; /* Force pin spacer to hold */
+  }
+}
