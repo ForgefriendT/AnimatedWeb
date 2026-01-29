@@ -2331,64 +2331,42 @@ select:focus {
     }
 }
 /* ========================================
-   FIX: HERO OVERLAP & SHABBY LAYOUT
+
+/* ========================================
+   SAFE HERO OVERLAP FIX
    ======================================== */
 
 @media (max-width: 768px) {
-  /* 1. Force strict hero height constraints */
+  /* Prevent horizontal scroll and messy overlap */
   .hero-sequence {
-    height: 100vh !important;
-    height: 100svh !important; /* Mobile safe height */
-    min-height: 100svh !important;
-    max-height: 100svh !important;
     overflow: hidden !important;
     position: relative !important;
-    z-index: 1 !important;
-    margin-bottom: 0 !important;
-    background: #000 !important; /* Prevent see-through */
   }
 
-  /* 2. Ensure Trust Strip pushes down correctly */
-  .trust-strip {
-    position: relative !important;
-    z-index: 20 !important; /* Sit on top of hero if scrolling */
-    background: var(--bg-dark) !important; /* Solid background */
-    margin-top: 0 !important;
-    border-top: 1px solid rgba(216, 207, 196, 0.1);
-    box-shadow: 0 -10px 30px rgba(0,0,0,0.5); /* Shadow to separate */
-  }
-
-  /* 3. Clean up overlapping text in Hero */
+  /* Move text blocks apart to clear the center logo */
   .hero-text-top {
-    top: 15% !important; /* Move down from top edge */
-    width: 90% !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
+    top: 12% !important; /* Move down slightly */
+    padding: 0 var(--space-2) !important;
   }
 
   .hero-text-bottom {
-    bottom: 15% !important; /* Move up from bottom edge */
-    width: 90% !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-  }
-  
-  /* 4. Fix Logo overlap */
-  .hero-logo-center {
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) scale(0.65) !important;
-    z-index: 5 !important;
+    bottom: 12% !important; /* Move up slightly */
+    padding: 0 var(--space-2) !important;
   }
 
-  /* 5. Ensure canvas stays put */
-  #hero-canvas {
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    z-index: 0 !important;
+  /* Shrink text to fit */
+  .hero-title {
+    font-size: 1.6rem !important; /* Smaller size */
+    line-height: 1.2 !important;
+  }
+
+  .hero-subtitle {
+    font-size: 0.8rem !important;
+    margin-bottom: 0 !important;
+  }
+
+  /* Shrink logo to avoid crashing into text */
+  .hero-logo-center {
+    transform: translate(-50%, -50%) scale(0.6) !important;
   }
 }
