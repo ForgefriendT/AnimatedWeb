@@ -143,6 +143,9 @@ section {
   color: var(--black);
 }
 
+.btn-primary {
+  /* Inherits gold outline style */
+}
 
 .btn-secondary {
   /* Same style, maybe secondary has white border? No, keeping Gold consistency */
@@ -1714,17 +1717,11 @@ footer a:hover {
   .scale-reveal,
   .glow-reveal,
   .slide-left,
-  .slide-right,
-  .logo-text-nav,
-  .logo-left-nav,
-  .logo-right-nav,
-  .logo-center-nav,
-  .logo-nail-overlay-nav {
-    transition: none !important;
-    animation: none !important;
-    opacity: 1 !important;
-    transform: none !important;
-    filter: none !important;
+  .slide-right {
+    transition: none;
+    opacity: 1;
+    transform: none;
+    filter: none;
   }
 }
 
@@ -1941,9 +1938,9 @@ select:focus {
     max-width: 100% !important;
   }
 
-  /* Section Spacing - Increased for luxury feel */
+  /* Section Spacing */
   section {
-    padding: var(--space-8) 0 !important;
+    padding: var(--space-6) 0 !important;
   }
 
   /* HEADER - Mobile Menu */
@@ -1989,8 +1986,7 @@ select:focus {
   .main-nav .btn {
     width: 100% !important;
     margin-top: var(--space-2) !important;
-    min-height: 56px !important;
-    font-size: 1rem !important;
+    min-height: 48px !important;
   }
 
   .mobile-menu-btn {
@@ -2169,9 +2165,9 @@ select:focus {
   }
 
   .btn-submit {
-    padding: 16px !important;
-    font-size: 1rem !important;
-    min-height: 56px !important;
+    padding: 14px !important;
+    font-size: 0.9rem !important;
+    min-height: 48px !important;
   }
 
   /* FOOTER - Single Column */
@@ -2198,12 +2194,12 @@ select:focus {
     font-size: 0.9rem !important;
   }
 
-  /* BUTTONS - Larger Touch Targets (Consistent 56px) */
+  /* BUTTONS - Larger Touch Targets */
   .btn {
-    min-height: 56px !important;
-    min-width: 56px !important;
-    padding: 16px 32px !important;
-    font-size: 1rem !important;
+    min-height: 48px !important;
+    min-width: 48px !important;
+    padding: 14px 24px !important;
+    font-size: 0.85rem !important;
   }
 
   /* Prevent Horizontal Scroll */
@@ -2577,9 +2573,7 @@ select:focus {
 
   /* Phase 3 Final - VISIBLE on mobile */
   .hero-text-final {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
+    display: block !important;
     opacity: 1 !important;
     /* Always visible */
     position: absolute !important;
@@ -2589,7 +2583,6 @@ select:focus {
     width: 90% !important;
     text-align: center !important;
     z-index: 20;
-    padding: 0 var(--space-3) !important;
   }
 
   /* Logo - HIDDEN on mobile */
@@ -2597,137 +2590,33 @@ select:focus {
     display: none !important;
   }
 
-  /* Improved title spacing for mobile */
-  .hero-text-final .hero-title {
-    font-size: 2rem !important;
-    margin-bottom: var(--space-3) !important;
-    line-height: 1.3 !important;
-  }
-
-  .hero-text-final .hero-pre-title {
-    font-size: 0.85rem !important;
-    margin-bottom: var(--space-2) !important;
-  }
-
-  .hero-text-final .hero-subtitle {
-    font-size: 1rem !important;
-    margin-bottom: var(--space-5) !important;
-    line-height: 1.5 !important;
-  }
-
-  /* Button Alignment - Side by Side (Row) with better spacing */
+  /* Button Alignment - Side by Side (Row) */
   .hero-actions {
     display: flex !important;
     flex-direction: row !important;
-    gap: 20px !important;
-    /* Increased spacing between buttons */
+    gap: 16px !important;
+    /* Increased from 12px */
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     /* Allow wrap on very small screens */
-    margin-bottom: var(--space-4) !important;
   }
 
-  /* Larger, more tappable buttons */
   .hero-text-bottom .btn,
   .hero-text-final .btn {
     width: auto !important;
-    min-width: 150px !important;
-    /* Larger minimum width */
-    padding: 18px 32px !important;
-    /* Larger padding for better tap targets */
+    min-width: 140px !important;
+    /* Increased from 120px */
+    padding: 16px 28px !important;
+    /* Increased from 12px 20px */
     font-size: 1rem !important;
-    /* Larger, more readable text */
+    /* Increased from 0.85rem */
     font-weight: 600 !important;
-    min-height: 56px !important;
-    /* Ensure good tap target height */
-  }
-
-  /* Rating badge spacing */
-  .hero-text-final .rating-badge {
-    margin-top: var(--space-2) !important;
-    padding: 12px 24px !important;
-    font-size: 0.9rem !important;
   }
 
   /* Overlay - Let JS Control Darkness */
   .canvas-overlay {
     background: rgba(0, 0, 0, 0) !important;
     /* JS will animate this */
-  }
-
-  /* ========================================
-     MOBILE NAVBAR LOGO ANIMATIONS
-     ======================================== */
-
-  /* Floating animation for entire logo */
-  @keyframes floatLogo {
-
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-
-    50% {
-      transform: translateY(-3px);
-    }
-  }
-
-  /* Subtle pulse for logo parts */
-  @keyframes logoPartPulse {
-
-    0%,
-    100% {
-      transform: scale(1);
-      opacity: 1;
-    }
-
-    50% {
-      transform: scale(1.05);
-      opacity: 0.9;
-    }
-  }
-
-  /* Glow effect for the nail overlay */
-  @keyframes nailGlow {
-
-    0%,
-    100% {
-      text-shadow: 0 0 5px rgba(216, 207, 196, 0.3),
-        0 0 10px rgba(216, 207, 196, 0.2);
-    }
-
-    50% {
-      text-shadow: 0 0 10px rgba(216, 207, 196, 0.6),
-        0 0 20px rgba(216, 207, 196, 0.4),
-        0 0 30px rgba(216, 207, 196, 0.2);
-    }
-  }
-
-  /* Apply animations to navbar logo */
-  .logo-text-nav {
-    animation: floatLogo 3s ease-in-out infinite !important;
-  }
-
-  .logo-left-nav,
-  .logo-right-nav {
-    animation: logoPartPulse 4s ease-in-out infinite !important;
-  }
-
-  .logo-left-nav {
-    animation-delay: 0s !important;
-  }
-
-  .logo-right-nav {
-    animation-delay: 2s !important;
-  }
-
-  .logo-center-nav {
-    animation: logoPartPulse 3s ease-in-out infinite !important;
-    animation-delay: 1s !important;
-  }
-
-  .logo-nail-overlay-nav {
-    animation: nailGlow 2.5s ease-in-out infinite !important;
   }
 }
