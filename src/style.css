@@ -1019,6 +1019,12 @@ section {
   opacity: 1;
 }
 
+@media (max-width: 768px) {
+  .logo-text-nav {
+    opacity: 1 !important;
+  }
+}
+
 .logo-left-nav,
 .logo-right-nav {
   font-size: 1.2rem;
@@ -2230,7 +2236,7 @@ select:focus {
 /* Small Mobile - 480px and below */
 @media (max-width: 480px) {
   .hero-title {
-    font-size: 1.5rem !important;
+    font-size: 1.8rem !important;
   }
 
   .hero-subtitle {
@@ -2249,10 +2255,11 @@ select:focus {
     font-size: 1.2rem !important;
   }
 
-  /* Gallery - Single Column on Very Small Screens */
+  /* Gallery - STAY 2 Column on all mobile screens */
   .gallery-grid {
-    grid-template-columns: 1fr !important;
-    grid-auto-rows: 220px !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    grid-auto-rows: 180px !important;
+    gap: 12px !important;
   }
 
   /* Navigation - Almost Full Width */
@@ -2605,13 +2612,22 @@ select:focus {
   .hero-text-bottom .btn,
   .hero-text-final .btn {
     width: auto !important;
-    min-width: 140px !important;
-    /* Increased from 120px */
-    padding: 16px 28px !important;
-    /* Increased from 12px 20px */
-    font-size: 1rem !important;
-    /* Increased from 0.85rem */
+    min-width: 150px !important;
+    /* Slightly more substantial */
+    padding: 16px 24px !important;
+    font-size: 0.95rem !important;
     font-weight: 600 !important;
+    letter-spacing: 0.05em;
+  }
+
+  .hero-actions {
+    margin-top: 32px !important;
+    /* Better breathing room */
+  }
+
+  .hero-subtitle {
+    margin-bottom: 0 !important;
+    /* Actions margin handles it */
   }
 
   /* Overlay - Let JS Control Darkness */

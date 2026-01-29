@@ -89,6 +89,7 @@ const preloadImages = () => {
     // Mobile: STOP canvas logic entirely. Video will handle it.
     if (isMobile) {
         console.log("Mobile detected: Disabling canvas sequence, enabling video fallback.");
+        setupScrollAnimation();
         return;
     }
 
