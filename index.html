@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Kaylee Nail Spa in Richmond, KY. Experience the most trusted luxury nail salon. Services include Manicures, Pedicures, Gel, and more. Call (859) 353-5541." />
+  <title>Kaylee Nail Spa - Richmond's Premier Luxury Nail Salon</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&family=Dancing+Script:wght@400;600;700&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="/src/style.css">
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "NailSalon",
+      "name": "Kaylee Nail Spa",
+      "image": "https://kayleenailspa.com/images/hero-bg.png",
+      "telephone": "859-353-5541",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "202 Wayne Dr, Suite 1",
+        "addressLocality": "Richmond",
+        "addressRegion": "KY",
+        "postalCode": "40475",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 37.7405, 
+        "longitude": -84.2940
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+          "opens": "09:30",
+          "closes": "19:30"
+        }
+      ],
+      "priceRange": "$$",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.7",
+        "reviewCount": "160"
+      }
+    }
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Do you accept walk-ins?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, walk-ins are welcome at Kaylee Nail Spa in Richmond, KY. However, we recommend booking an appointment for guaranteed service times."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What sanitization standards do you follow?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We adhere to strict hospital-grade sterilization protocols. Every tool is sanitized, and pedicure liners are single-use for your safety."
+          }
+        }
+      ]
+    }
+  </script>
+</head>
+
+<body>
+
+  <header class="site-header">
+    <div class="container header-container">
+      <a href="#" class="logo">
+        <div class="logo-text-nav">
+          <span class="logo-left-nav">Kylee</span>
+          <div class="logo-center-wrapper-nav">
+            <span class="logo-center-nav">K</span>
+            <span class="logo-nail-overlay-nav">Nail</span>
+          </div>
+          <span class="logo-right-nav">Spa</span>
+        </div>
+      </a>
+      <nav class="main-nav">
+        <a href="#services">Services</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#visit">Visit</a>
+        <button class="btn btn-primary" id="header-book-btn">Call Now</button>
+      </nav>
+      <button class="mobile-menu-btn" aria-label="Toggle Menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- SCROLL INTRO HERO -->
+    <section class="hero-sequence" id="hero-sequence">
+      <canvas id="hero-canvas"></canvas>
+      <div class="canvas-overlay" id="canvas-overlay"></div>
+      <div class="vignette-overlay"></div>
+      <div class="hero-border-left"></div>
+      <div class="hero-border-right"></div>
+
+      <!-- Center Logo (Phase 1 only, transitions to navbar) -->
+      <div class="hero-logo-center" id="hero-logo-center">
+        <div class="logo-text-decorative">
+          <span class="logo-left">Kylee</span>
+          <div class="logo-center-wrapper">
+            <span class="logo-center">K</span>
+            <span class="logo-nail-overlay">Nail</span>
+          </div>
+          <span class="logo-right">Spa</span>
+        </div>
+      </div>
+
+      <!-- Phase 1: Split Text Layout (Top Section) -->
+      <div class="hero-text-top" id="hero-text-top">
+        <div class="container">
+          <span class="hero-pre-title">Richmond, KY</span>
+          <h1 class="hero-title">Richmond's Most Trusted<br>Luxury Nail Experience</h1>
+        </div>
+      </div>
+
+      <!-- Phase 1: Split Text Layout (Bottom Section) -->
+      <div class="hero-text-bottom" id="hero-text-bottom">
+        <div class="container">
+          <p class="hero-subtitle">Precision. Cleanliness. Comfort. Every visit.</p>
+          <div class="hero-actions">
+            <a href="tel:8593535541" class="btn btn-primary btn-glassy">Call Now</a>
+            <a href="#services" class="btn btn-secondary btn-glassy">View Services</a>
+          </div>
+          <div class="rating-badge">
+            <span class="stars">★★★★★</span>
+            <span class="rating-text">4.7 | 160+ Reviews</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 3: Centered Final Text (Initially Hidden) -->
+      <div class="hero-text-final" id="hero-text-final">
+        <div class="container">
+          <span class="hero-pre-title">Richmond, KY</span>
+          <h1 class="hero-title">Richmond's Most Trusted<br>Luxury Nail Experience</h1>
+          <p class="hero-subtitle">Precision. Cleanliness. Comfort. Every visit.</p>
+          <div class="hero-actions">
+            <a href="tel:8593535541" class="btn btn-primary btn-glassy">Call Now</a>
+            <a href="#services" class="btn btn-secondary btn-glassy">View Services</a>
+          </div>
+          <div class="rating-badge">
+            <span class="stars">★★★★★</span>
+            <span class="rating-text">4.7 | 160+ Reviews</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="trust-strip">
+      <div class="container trust-grid">
+        <div class="trust-item">
+          <div class="quote">“Beautiful, clean, and detailed work.”</div>
+        </div>
+        <div class="trust-item center-item">
+          <div class="trust-icons">
+            <span>✨ Voted #1</span>
+            <span>💎 Premium</span>
+            <span>🌿 Safe</span>
+          </div>
+        </div>
+        <div class="trust-item">
+          <div class="quote">“Best nail salon in Richmond.”</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="experience" id="experience">
+      <div class="container">
+        <!-- Zig-Zag Row 1 -->
+        <div class="experience-row">
+          <div class="exp-image gs-reveal">
+            <img src="/images/gallery-1.png" alt="Clean and modern nail salon interior">
+          </div>
+          <div class="exp-content gs-reveal">
+            <span class="exp-overline">Safety First</span>
+            <h3>Hospital-Grade Sterilization</h3>
+            <p>Your health is our absolute priority. We utilize medical-grade autoclaves and single-use liners for every
+              pedicure. Relax knowing you are in the safest hands in Richmond.</p>
+          </div>
+        </div>
+
+        <!-- Zig-Zag Row 2 -->
+        <div class="experience-row reverse">
+          <div class="exp-image gs-reveal">
+            <img src="/images/gallery-3.png" alt="Luxury pedicure chairs">
+          </div>
+          <div class="exp-content gs-reveal">
+            <span class="exp-overline">Comfort</span>
+            <h3>Unrushed Precision</h3>
+            <p>We believe true luxury takes time. Our technicians are trained to never rush, ensuring detailed cuticle
+              care and perfect polish application every single visit.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="services" id="services">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="animate-fade-up">Our Menu</h2>
+          <p class="animate-fade-up">Expert care for your hands and feet.</p>
+        </div>
+
+        <div class="services-card-container gs-reveal-stagger">
+          <div class="services-menu-grid">
+            <div class="menu-category">
+              <h3>Manicures</h3>
+              <div class="menu-item">
+                <div class="menu-text">
+                  <span class="menu-title">Classic Manicure</span>
+                  <span class="menu-desc">Nail shaping, cuticle care, massage, and polish.</span>
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="menu-text">
+                  <span class="menu-title">Gel Manicure</span>
+                  <span class="menu-desc">Long-lasting gloss and durability.</span>
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="menu-text">
+                  <span class="menu-title">Luxury Spa Manicure</span>
+                  <span class="menu-desc">Exfoliation, mask, and extended massage.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="menu-category">
+              <h3>Pedicures</h3>
+              <div class="menu-item">
+                <div class="menu-text">
+                  <span class="menu-title">Classic Pedicure</span>
+                  <span class="menu-desc">Soak, shape, cuticle care, and polish.</span>
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="menu-text">
+                  <span class="menu-title">Deluxe Pedicure</span>
+                  <span class="menu-desc">Callus removal, sugar scrub, and hot towel.</span>
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="menu-text">
+                  <span class="menu-title">Signature Jelly Pedicure</span>
+                  <span class="menu-desc">The ultimate relaxation experience with jelly soak.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="menu-category">
+              <h3>Enhancements</h3>
+              <div class="menu-item">
+                <div class="menu-text">
+                  <span class="menu-title">Acrylic Full Set</span>
+                  <span class="menu-desc">Durable extensions tailored to your shape.</span>
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="menu-text">
+                  <span class="menu-title">Dip Powder</span>
+                  <span class="menu-desc">Healthy alternative for strength and color.</span>
+                </div>
+              </div>
+              <div class="menu-item">
+                <div class="menu-text">
+                  <span class="menu-title">Pink & White</span>
+                  <span class="menu-desc">Classic French look with permanent acrylic.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="menu-category">
+              <h3>Add-Ons</h3>
+              <div class="menu-item">
+                <div class="menu-text">
+                  <span class="menu-title">Nail Art (Per Nail)</span>
+                </div>
+                <span class="menu-price">Varies</span>
+              </div>
+              <div class="menu-item">
+                <div class="menu-text">
+                  <span class="menu-title">French Tip Design</span>
+                </div>
+                <span class="menu-price">+ Add</span>
+              </div>
+              <div class="menu-item">
+                <div class="menu-text">
+                  <span class="menu-title">Paraffin Wax</span>
+                </div>
+                <span class="menu-price">+ Add</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="services-footer">
+            <p class="menu-note">Custom designs available upon request.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery" id="gallery">
+      <div class="container">
+        <div class="section-header">
+          <h2>Visual Proof</h2>
+        </div>
+        <!-- PROMPT: create a grid of 6 images showing luxury nail art, clean pedicure chairs, and salon interior -->
+        <div class="gallery-grid">
+          <div class="gallery-item"><img src="/images/gallery-1.png" alt="Clean luxury salon interior"></div>
+          <div class="gallery-item"><img src="/images/gallery-2.png" alt="Elegant nude gel manicure"></div>
+          <div class="gallery-item"><img src="/images/gallery-3.png" alt="Premium pedicure spa chair"></div>
+          <div class="gallery-item"><img src="/images/gallery-4.png" alt="French tip almond nails"></div>
+          <div class="gallery-item"><img src="/images/gallery-5.png" alt="Manicure station with marble top"></div>
+          <div class="gallery-item"><img src="/images/gallery-6.png" alt="Salon ambiance and details"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="why-us">
+      <div class="container">
+        <div class="section-header">
+          <h2>Why Kaylee Nail Spa?</h2>
+          <p>The standard for luxury in Richmond.</p>
+        </div>
+        <div class="why-grid">
+          <div class="why-card">
+            <div class="why-icon">🏆</div>
+            <h3>Top Rated</h3>
+            <p>Consistently rated #1 in Richmond (4.7 Stars) for service and quality.</p>
+          </div>
+          <div class="why-card">
+            <div class="why-icon">✨</div>
+            <h3>Immaculate</h3>
+            <p>We strictly adhere to hospital-grade sterilization protocols.</p>
+          </div>
+          <div class="why-card">
+            <div class="why-icon">🌿</div>
+            <h3>Calm Atmosphere</h3>
+            <p>A modern sanctuary designed for your complete relaxation.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="visit" id="visit">
+      <div class="container visit-container">
+        <div class="visit-info">
+          <h2>Visit Us</h2>
+          <address>
+            <p class="address-line">202 Wayne Dr, Suite 1</p>
+            <p class="address-line">Richmond, KY 40475</p>
+          </address>
+          <p class="phone"><a href="tel:8593535541">(859) 353-5541</a></p>
+          <div class="hours">
+            <h3>Hours</h3>
+            <p>Mon - Sat: 9:30 AM – 7:30 PM</p>
+            <p>Sun: Closed</p>
+          </div>
+          <div class="visit-cta">
+            <p>Walk-ins Welcome</p>
+            <a href="tel:8593535541" class="btn btn-primary">Call For Directions</a>
+          </div>
+        </div>
+        <div class="visit-map">
+          <div class="map-frame">
+            <!-- Placeholder for Map Image or Embed -->
+            <div class="map-placeholder">
+              <span>Richmond, KY Map Embed</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Request Appointment</h2>
+          <p>Limited availability. Secure your time slot.</p>
+        </div>
+        <form class="contact-form">
+          <div class="form-group">
+            <input type="text" placeholder="Your Name" required />
+          </div>
+          <div class="form-group">
+            <input type="tel" placeholder="Phone (e.g. 859-353-5541)" required />
+          </div>
+          <div class="form-group">
+            <textarea placeholder="Preferred Dates & Services..."></textarea>
+          </div>
+          <button type="submit" class="btn-submit">Request Confirmation</button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <p class="footer-brand">Kaylee Nail Spa</p>
+        <p class="footer-desc">Richmond’s premier destination for luxury nail care and relaxation.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul class="footer-links">
+          <li><a href="#services">Services Menu</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#visit">Location</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <ul class="footer-links">
+          <li><a href="tel:8593535541">(859) 353-5541</a></li>
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#">Instagram</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Visit</h4>
+        <p>202 Wayne Dr, Suite 1<br>Richmond, KY</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="copyright">&copy; 2026 Kaylee Nail Spa. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>
