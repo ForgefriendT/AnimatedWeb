@@ -143,9 +143,6 @@ section {
   color: var(--black);
 }
 
-.btn-primary {
-  /* Inherits gold outline style */
-}
 
 .btn-secondary {
   /* Same style, maybe secondary has white border? No, keeping Gold consistency */
