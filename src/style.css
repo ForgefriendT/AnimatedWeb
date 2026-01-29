@@ -392,7 +392,7 @@ section {
   /* Dark Card */
   border: 1px solid var(--accent-color);
   padding: var(--space-6);
-  max-width: 900px;
+  max-width: 1024px;
   margin: 0 auto;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
   position: relative;
@@ -671,7 +671,7 @@ section {
 }
 
 /* Responsive */
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
   .why-grid {
     grid-template-columns: 1fr;
   }
@@ -776,7 +776,7 @@ section {
   pointer-events: none;
   transition: opacity 0.8s ease;
   width: 90%;
-  max-width: 900px;
+  max-width: 1024px;
 }
 
 .hero-text-final.visible {
@@ -887,7 +887,7 @@ section {
 }
 
 /* Mobile Responsive */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .hero-title {
     font-size: 2.5rem;
   }
@@ -1019,7 +1019,7 @@ section {
   opacity: 1;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .logo-text-nav {
     opacity: 1 !important;
   }
@@ -1141,7 +1141,7 @@ section {
 }
 
 /* Mobile Optimization */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
 
   /* Ensure scroll lock works */
   .hero-sequence {
@@ -1324,7 +1324,7 @@ section {
 }
 
 /* Mobile: hide borders */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
 
   .hero-border-left,
   .hero-border-right {
@@ -1362,7 +1362,7 @@ section {
 }
 
 /* Mobile logo sizing */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .logo-center {
     font-size: 4.5rem !important;
   }
@@ -1836,7 +1836,7 @@ select:focus {
    ======================================== */
 
 /* Tablet & Mobile - 768px and below */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
 
   /* HERO SECTION - FIX OVERLAPPING */
   .hero-text-top {
@@ -2346,7 +2346,7 @@ select:focus {
    SAFE HERO OVERLAP FIX
    ======================================== */
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
 
   /* Prevent horizontal scroll and messy overlap */
   .hero-sequence {
@@ -2390,7 +2390,7 @@ select:focus {
    DEFINITIVE MOBILE APP LAYOUT FIX
    ======================================== */
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
 
   /* 1. VISIBILITY: FORCE ANIMATION SHOW */
   #hero-canvas {
@@ -2462,7 +2462,7 @@ select:focus {
    CRITICAL ALIGNMENT & SCROLL FIX
    ======================================== */
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
 
   /* Fix Alignment - Ensure Text is Centered */
   .hero-text-bottom {
@@ -2509,7 +2509,7 @@ select:focus {
   /* Beige fallback behind image */
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
 
   /* Ensure canvas is transparent so background shows through until draw */
   #hero-canvas {
@@ -2534,7 +2534,7 @@ select:focus {
   /* Behind overlay */
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
 
   /* Force navbar visible on mobile */
   .site-header {

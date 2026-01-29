@@ -84,7 +84,7 @@ let isFirstFrameReady = false;
 const preloadImages = () => {
     const basePath = "/images/intro-sequence/Create_a_smooth_202601291641_8mr1q_";
     const padIndex = (index) => index.toString().padStart(3, '0');
-    const isMobile = window.innerWidth <= 768;
+    const isMobile = window.innerWidth <= 1024;
 
     // Mobile: STOP canvas logic entirely. Video will handle it.
     if (isMobile) {
@@ -165,7 +165,7 @@ const setupScrollAnimation = () => {
     const header = document.querySelector('.site-header');
     const centerLogo = document.getElementById('hero-logo-center');
 
-    const isMobile = window.innerWidth <= 768;
+    const isMobile = window.innerWidth <= 1024;
 
     // MOBILE: Show Phase 3 immediately, no scroll animation
     if (isMobile) {
