@@ -33,8 +33,30 @@ if (canvas) resizeCanvas();
 // Helper: Render Logic (Cover Fit with Bottom Crop)
 function renderFrame() {
     if (!canvas || !ctx) return;
-    const img = images[imageSequence.frame];
-    if (!img) return;
+
+    let img = images[imageSequence.frame];
+
+    // If current frame not loaded yet, find closest loaded frame
+    if (!img || !img.complete) {
+        // Look backward first
+        for (let i = imageSequence.frame - 1; i >= 0; i--) {
+            if (images[i] && images[i].complete) {
+                img = images[i];
+                break;
+            }
+        }
+        // If still not found, look forward
+        if (!img || !img.complete) {
+            for (let i = imageSequence.frame + 1; i < frameCount; i++) {
+                if (images[i] && images[i].complete) {
+                    img = images[i];
+                    break;
+                }
+            }
+        }
+    }
+
+    if (!img || !img.complete) return;
 
     // Crop percentage from bottom (to hide VEO logo)
     const cropBottomPercent = 0.15;
@@ -55,24 +77,72 @@ function renderFrame() {
     );
 };
 
-// Preload Images (Silent - No Loading Screen)
+// Preload Images (Progressive Loading with Immediate First Frame)
+let imagesLoaded = 0;
+let isFirstFrameReady = false;
+
 const preloadImages = () => {
     const basePath = "/images/intro-sequence/Create_a_smooth_202601291641_8mr1q_";
     const padIndex = (index) => index.toString().padStart(3, '0');
 
-    for (let i = 0; i < frameCount; i++) {
+    // Priority loading: Load first frame, last frame, and every 10th frame first
+    const priorityFrames = [0, frameCount - 1, ...Array.from({ length: Math.ceil(frameCount / 10) }, (_, i) => i * 10)];
+    const regularFrames = Array.from({ length: frameCount }, (_, i) => i).filter(i => !priorityFrames.includes(i));
+
+    // Load priority frames first
+    const loadFrame = (index, onComplete) => {
         const img = new Image();
-        img.src = `${basePath}${padIndex(i)}.jpg`;
+        img.src = `${basePath}${padIndex(index)}.jpg`;
+
         img.onload = () => {
-            if (i === 0) {
-                // Render first frame immediately
+            imagesLoaded++;
+
+            // Show first frame immediately when ready
+            if (index === 0 && !isFirstFrameReady) {
+                isFirstFrameReady = true;
                 renderFrame();
                 setupScrollAnimation();
+
             }
+
+            if (onComplete) onComplete();
         };
-        img.onerror = (e) => console.error(`Failed to load frame ${i}:`, e);
-        images.push(img);
+
+        img.onerror = (e) => {
+            console.error(`Failed to load frame ${index}:`, e);
+            if (onComplete) onComplete();
+        };
+
+        images[index] = img;
+    };
+
+    // Initialize images array
+    for (let i = 0; i < frameCount; i++) {
+        images[i] = null;
     }
+
+    // Load priority frames first
+    let priorityIndex = 0;
+    const loadNextPriority = () => {
+        if (priorityIndex < priorityFrames.length) {
+            loadFrame(priorityFrames[priorityIndex], loadNextPriority);
+            priorityIndex++;
+        } else {
+            // Start loading regular frames in background
+            loadRegularFrames();
+        }
+    };
+
+    // Load regular frames in background
+    const loadRegularFrames = () => {
+        regularFrames.forEach((index, i) => {
+            // Stagger loading to prevent overwhelming the browser
+            setTimeout(() => loadFrame(index), i * 50);
+        });
+    };
+
+    // Start loading
+    loadNextPriority();
 };
 
 // 3-Phase Scroll Animation Logic
