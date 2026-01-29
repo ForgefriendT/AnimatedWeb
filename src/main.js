@@ -31,21 +31,15 @@ window.addEventListener("resize", resizeCanvas);
 if (canvas) resizeCanvas();
 
 // Helper: Render Logic (Cover Fit with Bottom Crop)
-let lastRenderedFrame = -1; // Cache to prevent redundant draws
-
 function renderFrame() {
     if (!canvas || !ctx) return;
 
-    // OPTIMIZATION: Only draw if the frame has changed
-    const currentFrameIndex = Math.round(imageSequence.frame); // Ensure integer
-    if (currentFrameIndex === lastRenderedFrame) return;
-
-    let img = images[currentFrameIndex];
+    let img = images[imageSequence.frame];
 
     // If current frame not loaded yet, find closest loaded frame
     if (!img || !img.complete) {
         // Look backward first
-        for (let i = currentFrameIndex - 1; i >= 0; i--) {
+        for (let i = imageSequence.frame - 1; i >= 0; i--) {
             if (images[i] && images[i].complete) {
                 img = images[i];
                 break;
@@ -53,7 +47,7 @@ function renderFrame() {
         }
         // If still not found, look forward
         if (!img || !img.complete) {
-            for (let i = currentFrameIndex + 1; i < frameCount; i++) {
+            for (let i = imageSequence.frame + 1; i < frameCount; i++) {
                 if (images[i] && images[i].complete) {
                     img = images[i];
                     break;
@@ -63,8 +57,6 @@ function renderFrame() {
     }
 
     if (!img || !img.complete) return;
-
-    lastRenderedFrame = currentFrameIndex; // Update cache
 
     // Crop percentage from bottom (to hide VEO logo)
     const cropBottomPercent = 0.15;
@@ -253,7 +245,7 @@ const setupScrollAnimation = () => {
         // MOBILE DUMMY TWEEN
         // We need the timeline to have "length"/duration even without frame scrubbing
         // so that the scroll distance (+6000px) still maps loosely to the text animations.
-        tl.to({}, { duration: 1 });
+        tl.to({}, { duration: 3 });
     }
 };
 
