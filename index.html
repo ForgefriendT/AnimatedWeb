@@ -111,6 +111,11 @@
     <section class="hero-sequence" id="hero-sequence">
       <canvas id="hero-canvas"></canvas>
       <div class="canvas-overlay" id="canvas-overlay"></div>
+
+      <!-- Mobile Video Fallback -->
+      <video class="mobile-hero-video" autoplay muted loop playsinline poster="/images/hero-bg.png">
+        <source src="/mobile-hero.mp4" type="video/mp4">
+      </video>
       <div class="vignette-overlay"></div>
       <div class="hero-border-left"></div>
       <div class="hero-border-right"></div>

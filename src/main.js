@@ -86,18 +86,9 @@ const preloadImages = () => {
     const padIndex = (index) => index.toString().padStart(3, '0');
     const isMobile = window.innerWidth <= 768;
 
-    // Mobile: Load ONLY the last frame
+    // Mobile: STOP canvas logic entirely. Video will handle it.
     if (isMobile) {
-        const lastFrameIndex = frameCount - 1;
-        const img = new Image();
-        img.src = `${basePath}${padIndex(lastFrameIndex)}.jpg`;
-        img.onload = () => {
-            images[lastFrameIndex] = img;
-            imageSequence.frame = lastFrameIndex; // Set to last frame
-            isFirstFrameReady = true;
-            renderFrame();
-            setupScrollAnimation(); // Will handle static setup for mobile
-        };
+        console.log("Mobile detected: Disabling canvas sequence, enabling video fallback.");
         return;
     }
 
@@ -175,36 +166,9 @@ const setupScrollAnimation = () => {
 
     const isMobile = window.innerWidth <= 768;
 
-    // MOBILE: Static Final State (No Scroll Animation)
+    // MOBILE: Video handles everything. No JS logic needed.
     if (isMobile) {
-        // Show Final Text
-        if (textFinal) {
-            textFinal.style.opacity = 1;
-            textFinal.classList.add('visible');
-        }
-
-        // Show Header
-        if (header) {
-            header.classList.add('visible');
-            header.style.opacity = 1;
-            header.style.transform = 'translateY(0)';
-        }
-
-        // Dark Overlay for readability
-        if (canvasOverlay) {
-            canvasOverlay.style.background = 'rgba(0, 0, 0, 0.5)';
-        }
-
-        // Hide Phase 1 Elements
-        if (textTop) textTop.style.display = 'none';
-        if (textBottom) textBottom.style.display = 'none';
-        if (centerLogo) centerLogo.style.display = 'none';
-
-        // Render the last frame (already loaded in preloadImages if mobile)
-        imageSequence.frame = frameCount - 1;
-        renderFrame();
-
-        return; // EXIT - Do not attach ScrollTrigger
+        return;
     }
 
     // DESKTOP: ScrollTrigger Animation
