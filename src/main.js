@@ -166,13 +166,66 @@ const setupScrollAnimation = () => {
 
     const isMobile = window.innerWidth <= 768;
 
-    // DESKTOP & MOBILE: ScrollTrigger Animation
+    // MOBILE: Separate simple timeline
+    if (isMobile) {
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".hero-sequence",
+                start: "top top",
+                end: "+=2000", // Shorter for mobile
+                pin: true,
+                scrub: 0.5,
+                onUpdate: (self) => {
+                    const progress = self.progress;
+
+                    // Phase 1 → 2: Fade out text and logo
+                    if (progress < 0.1) {
+                        const fadeProgress = progress / 0.1;
+                        const currentOpacity = Math.max(0, 1 - fadeProgress);
+                        if (textTop) textTop.style.opacity = currentOpacity;
+                        if (textBottom) textBottom.style.opacity = currentOpacity;
+                        if (centerLogo) centerLogo.style.opacity = currentOpacity;
+                    } else {
+                        if (textTop) textTop.style.opacity = 0;
+                        if (textBottom) textBottom.style.opacity = 0;
+                        if (centerLogo) centerLogo.style.opacity = 0;
+                    }
+
+                    // Phase 2 → 3: Darken video, show Phase 3
+                    if (progress > 0.70) {
+                        const phase3Progress = (progress - 0.70) / 0.30;
+                        canvasOverlay.style.background = `rgba(0, 0, 0, ${0.5 * phase3Progress})`;
+
+                        if (phase3Progress > 0.1) {
+                            const textProgress = (phase3Progress - 0.1) / 0.9;
+                            textFinal.style.opacity = textProgress;
+                            if (textProgress > 0.3) {
+                                textFinal.classList.add('visible');
+                            }
+                        }
+
+                        if (phase3Progress > 0.2) {
+                            header.classList.add('visible');
+                        }
+                    } else {
+                        canvasOverlay.style.background = 'rgba(0, 0, 0, 0)';
+                        textFinal.style.opacity = 0;
+                        textFinal.classList.remove('visible');
+                        header.classList.remove('visible');
+                    }
+                }
+            }
+        });
+        return; // Exit early for mobile
+    }
+
+    // DESKTOP: Original frame-by-frame animation
     // Main Timeline
     const tl = gsap.timeline({
         scrollTrigger: {
             trigger: ".hero-sequence",
             start: "top top",
-            end: isMobile ? "+=2000" : "+=6000", // Mobile: shorter scroll, Desktop: extended
+            end: "+=6000", // Extended significantly - stays much longer
             pin: true,
             scrub: 0.5,
             onUpdate: (self) => {
@@ -206,7 +259,7 @@ const setupScrollAnimation = () => {
                 if (progress > 0.70) {
                     const phase3Progress = (progress - 0.70) / 0.30;
 
-                    // Dark tint on canvas (or video)
+                    // Dark tint on canvas
                     canvasOverlay.style.background = `rgba(0, 0, 0, ${0.5 * phase3Progress})`;
 
                     // Fade in centered text
@@ -233,16 +286,12 @@ const setupScrollAnimation = () => {
     });
 
     // Animate frames (DESKTOP ONLY)
-    // Mobile uses video, so we skip the frame scrubbing to save performance
-    if (!isMobile) {
-        tl.to(imageSequence, {
-            frame: frameCount - 1,
-            snap: "frame",
-            ease: "none",
-            onUpdate: renderFrame
-        });
-    }
-    // Mobile: No dummy tween needed - the timeline will still work with just the onUpdate callbacks
+    tl.to(imageSequence, {
+        frame: frameCount - 1,
+        snap: "frame",
+        ease: "none",
+        onUpdate: renderFrame
+    });
 };
 
 // Start Sequence
