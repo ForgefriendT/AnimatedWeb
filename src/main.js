@@ -172,7 +172,7 @@ const setupScrollAnimation = () => {
         scrollTrigger: {
             trigger: ".hero-sequence",
             start: "top top",
-            end: "+=6000", // Extended significantly - stays much longer
+            end: isMobile ? "+=2000" : "+=6000", // Mobile: shorter scroll, Desktop: extended
             pin: true,
             scrub: 0.5,
             onUpdate: (self) => {
@@ -241,12 +241,8 @@ const setupScrollAnimation = () => {
             ease: "none",
             onUpdate: renderFrame
         });
-    } else {
-        // MOBILE DUMMY TWEEN
-        // We need the timeline to have "length"/duration even without frame scrubbing
-        // so that the scroll distance (+6000px) still maps loosely to the text animations.
-        tl.to({}, { duration: 10 });
     }
+    // Mobile: No dummy tween needed - the timeline will still work with just the onUpdate callbacks
 };
 
 // Start Sequence
