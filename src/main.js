@@ -77,14 +77,31 @@ function renderFrame() {
     );
 };
 
-// Preload Images (Progressive Loading with Immediate First Frame)
+// Preload Images (Mobile Optimized: Loads only last frame)
 let imagesLoaded = 0;
 let isFirstFrameReady = false;
 
 const preloadImages = () => {
     const basePath = "/images/intro-sequence/Create_a_smooth_202601291641_8mr1q_";
     const padIndex = (index) => index.toString().padStart(3, '0');
+    const isMobile = window.innerWidth <= 768;
 
+    // Mobile: Load ONLY the last frame
+    if (isMobile) {
+        const lastFrameIndex = frameCount - 1;
+        const img = new Image();
+        img.src = `${basePath}${padIndex(lastFrameIndex)}.jpg`;
+        img.onload = () => {
+            images[lastFrameIndex] = img;
+            imageSequence.frame = lastFrameIndex; // Set to last frame
+            isFirstFrameReady = true;
+            renderFrame();
+            setupScrollAnimation(); // Will handle static setup for mobile
+        };
+        return;
+    }
+
+    // DESKTOP: Full Sequence Loading
     // Priority loading: Load first frame, last frame, and every 10th frame first
     const priorityFrames = [0, frameCount - 1, ...Array.from({ length: Math.ceil(frameCount / 10) }, (_, i) => i * 10)];
     const regularFrames = Array.from({ length: frameCount }, (_, i) => i).filter(i => !priorityFrames.includes(i));
@@ -155,6 +172,42 @@ const setupScrollAnimation = () => {
     const canvasOverlay = document.getElementById('canvas-overlay');
     const header = document.querySelector('.site-header');
     const centerLogo = document.getElementById('hero-logo-center');
+
+    const isMobile = window.innerWidth <= 768;
+
+    // MOBILE: Static Final State (No Scroll Animation)
+    if (isMobile) {
+        // Show Final Text
+        if (textFinal) {
+            textFinal.style.opacity = 1;
+            textFinal.classList.add('visible');
+        }
+
+        // Show Header
+        if (header) {
+            header.classList.add('visible');
+            header.style.opacity = 1;
+            header.style.transform = 'translateY(0)';
+        }
+
+        // Dark Overlay for readability
+        if (canvasOverlay) {
+            canvasOverlay.style.background = 'rgba(0, 0, 0, 0.5)';
+        }
+
+        // Hide Phase 1 Elements
+        if (textTop) textTop.style.display = 'none';
+        if (textBottom) textBottom.style.display = 'none';
+        if (centerLogo) centerLogo.style.display = 'none';
+
+        // Render the last frame (already loaded in preloadImages if mobile)
+        imageSequence.frame = frameCount - 1;
+        renderFrame();
+
+        return; // EXIT - Do not attach ScrollTrigger
+    }
+
+    // DESKTOP: ScrollTrigger Animation
     // Main Timeline
     const tl = gsap.timeline({
         scrollTrigger: {
@@ -167,19 +220,14 @@ const setupScrollAnimation = () => {
                 const progress = self.progress;
 
                 // Phase 1 → 2: Fade out split text AND center logo (0% - 15%)
-                // Phase 1 → 2: Fade out split text AND center logo (0% - 15%)
-                // ONLY ON DESKTOP - On mobile we want the UI to stay visible
-                const isMobile = window.innerWidth <= 768;
-
                 if (progress < 0.1) {
                     const fadeProgress = progress / 0.1;
                     const currentOpacity = Math.max(0, 1 - fadeProgress);
 
-                    // On mobile, keep bottom text visible but fade logo out
-                    if (!isMobile && textTop) {
+                    if (textTop) {
                         textTop.style.opacity = currentOpacity;
                     }
-                    if (!isMobile && textBottom) {
+                    if (textBottom) {
                         textBottom.style.opacity = currentOpacity;
                     }
                     if (textTop) textTop.style.animation = 'none';
@@ -189,8 +237,8 @@ const setupScrollAnimation = () => {
                         centerLogo.style.animation = 'none';
                     }
                 } else {
-                    if (!isMobile && textTop) textTop.style.opacity = 0;
-                    if (!isMobile && textBottom) textBottom.style.opacity = 0;
+                    if (textTop) textTop.style.opacity = 0;
+                    if (textBottom) textBottom.style.opacity = 0;
                     if (centerLogo) centerLogo.style.opacity = 0;
                 }
 

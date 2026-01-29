@@ -2474,3 +2474,23 @@ select:focus {
     height: 100vh !important; /* Force pin spacer to hold */
   }
 }
+
+/* ========================================
+   FAILSAFE: FALLBACK IMAGE
+   ======================================= */
+.hero-sequence {
+  /* Use the first frame as a static background */
+  /* This ensures NO BLACK SCREEN ever, even if JS fails */
+  background-image: url('/images/intro-sequence/Create_a_smooth_202601291641_8mr1q_000.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #E8DCC8; /* Beige fallback behind image */
+}
+
+@media (max-width: 768px) {
+  /* Ensure canvas is transparent so background shows through until draw */
+  #hero-canvas {
+    background: transparent !important; 
+  }
+}
