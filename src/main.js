@@ -166,56 +166,29 @@ const setupScrollAnimation = () => {
 
     const isMobile = window.innerWidth <= 768;
 
-    // MOBILE: Separate simple timeline
+    // MOBILE: Show Phase 3 immediately, no scroll animation
     if (isMobile) {
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: ".hero-sequence",
-                start: "top top",
-                end: "+=2000", // Shorter for mobile
-                pin: true,
-                scrub: 0.5,
-                onUpdate: (self) => {
-                    const progress = self.progress;
+        // Hide Phase 1 content
+        if (textTop) textTop.style.display = 'none';
+        if (textBottom) textBottom.style.display = 'none';
+        if (centerLogo) centerLogo.style.display = 'none';
 
-                    // Phase 1 → 2: Fade out text and logo
-                    if (progress < 0.1) {
-                        const fadeProgress = progress / 0.1;
-                        const currentOpacity = Math.max(0, 1 - fadeProgress);
-                        if (textTop) textTop.style.opacity = currentOpacity;
-                        if (textBottom) textBottom.style.opacity = currentOpacity;
-                        if (centerLogo) centerLogo.style.opacity = currentOpacity;
-                    } else {
-                        if (textTop) textTop.style.opacity = 0;
-                        if (textBottom) textBottom.style.opacity = 0;
-                        if (centerLogo) centerLogo.style.opacity = 0;
-                    }
+        // Show Phase 3 content immediately
+        if (textFinal) {
+            textFinal.style.opacity = '1';
+            textFinal.classList.add('visible');
+        }
 
-                    // Phase 2 → 3: Darken video, show Phase 3
-                    if (progress > 0.70) {
-                        const phase3Progress = (progress - 0.70) / 0.30;
-                        canvasOverlay.style.background = `rgba(0, 0, 0, ${0.5 * phase3Progress})`;
+        // Show navbar immediately
+        if (header) {
+            header.classList.add('visible');
+        }
 
-                        if (phase3Progress > 0.1) {
-                            const textProgress = (phase3Progress - 0.1) / 0.9;
-                            textFinal.style.opacity = textProgress;
-                            if (textProgress > 0.3) {
-                                textFinal.classList.add('visible');
-                            }
-                        }
+        // Darken video overlay
+        if (canvasOverlay) {
+            canvasOverlay.style.background = 'rgba(0, 0, 0, 0.5)';
+        }
 
-                        if (phase3Progress > 0.2) {
-                            header.classList.add('visible');
-                        }
-                    } else {
-                        canvasOverlay.style.background = 'rgba(0, 0, 0, 0)';
-                        textFinal.style.opacity = 0;
-                        textFinal.classList.remove('visible');
-                        header.classList.remove('visible');
-                    }
-                }
-            }
-        });
         return; // Exit early for mobile
     }
 
