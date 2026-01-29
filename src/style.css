@@ -1941,9 +1941,9 @@ select:focus {
     max-width: 100% !important;
   }
 
-  /* Section Spacing */
+  /* Section Spacing - Increased for luxury feel */
   section {
-    padding: var(--space-6) 0 !important;
+    padding: var(--space-8) 0 !important;
   }
 
   /* HEADER - Mobile Menu */
@@ -1989,7 +1989,8 @@ select:focus {
   .main-nav .btn {
     width: 100% !important;
     margin-top: var(--space-2) !important;
-    min-height: 48px !important;
+    min-height: 56px !important;
+    font-size: 1rem !important;
   }
 
   .mobile-menu-btn {
@@ -2168,9 +2169,9 @@ select:focus {
   }
 
   .btn-submit {
-    padding: 14px !important;
-    font-size: 0.9rem !important;
-    min-height: 48px !important;
+    padding: 16px !important;
+    font-size: 1rem !important;
+    min-height: 56px !important;
   }
 
   /* FOOTER - Single Column */
@@ -2197,12 +2198,12 @@ select:focus {
     font-size: 0.9rem !important;
   }
 
-  /* BUTTONS - Larger Touch Targets */
+  /* BUTTONS - Larger Touch Targets (Consistent 56px) */
   .btn {
-    min-height: 48px !important;
-    min-width: 48px !important;
-    padding: 14px 24px !important;
-    font-size: 0.85rem !important;
+    min-height: 56px !important;
+    min-width: 56px !important;
+    padding: 16px 32px !important;
+    font-size: 1rem !important;
   }
 
   /* Prevent Horizontal Scroll */
