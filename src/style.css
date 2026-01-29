@@ -2559,8 +2559,12 @@ select:focus {
     display: block !important;
     opacity: 1;
     /* Let JS control this */
+    position: absolute !important;
     top: 15% !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
     width: 90% !important;
+    text-align: center !important;
   }
 
   /* Phase 1 Bottom - Visible Initially, Fades Out */
@@ -2568,8 +2572,12 @@ select:focus {
     display: block !important;
     opacity: 1;
     /* Let JS control this */
+    position: absolute !important;
     bottom: 10% !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
     width: 90% !important;
+    text-align: center !important;
   }
 
   /* Phase 3 Final - Hidden Initially, Fades In */
@@ -2577,10 +2585,12 @@ select:focus {
     display: block !important;
     opacity: 0;
     /* Let JS control this */
+    position: absolute !important;
     top: 50% !important;
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
     width: 90% !important;
+    text-align: center !important;
     z-index: 20;
   }
 

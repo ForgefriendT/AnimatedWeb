@@ -245,7 +245,7 @@ const setupScrollAnimation = () => {
         // MOBILE DUMMY TWEEN
         // We need the timeline to have "length"/duration even without frame scrubbing
         // so that the scroll distance (+6000px) still maps loosely to the text animations.
-        tl.to({}, { duration: 3 });
+        tl.to({}, { duration: 10 });
     }
 };
 
