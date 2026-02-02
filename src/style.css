@@ -2635,4 +2635,37 @@ select:focus {
     background: rgba(0, 0, 0, 0) !important;
     /* JS will animate this */
   }
+
+  /* CRITICAL FIX: Prevent pin-spacer from creating long black screen */
+  .pin-spacer,
+  [class*="pin-spacer"] {
+    height: 100vh !important;
+    min-height: 100vh !important;
+    max-height: 100vh !important;
+  }
+
+  /* Ensure hero sequence doesn't extend past viewport */
+  .hero-sequence {
+    height: 100vh !important;
+    min-height: 100vh !important;
+    max-height: 100vh !important;
+    position: relative !important;
+  }
+
+  /* Force trust-strip to appear immediately after hero without gap */
+  .trust-strip {
+    margin-top: 0 !important;
+    position: relative !important;
+    z-index: 10 !important;
+  }
+
+  /* Remove any potential spacing issues */
+  main {
+    background: var(--bg-color) !important;
+  }
+
+  /* Ensure no black sections appear */
+  section {
+    background: var(--bg-color) !important;
+  }
 }
