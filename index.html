@@ -3,11 +3,35 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
   <meta name="description"
-    content="Kaylee Nail Spa in Richmond, KY. Experience the most trusted luxury nail salon. Services include Manicures, Pedicures, Gel, and more. Call (859) 353-5541." />
+    content="Richmond KY's top-rated luxury nail salon. Hospital-grade clean. Expert manicures, pedicures, gel nails. Walk-ins welcome. Call (859) 353-5541." />
   <title>Kaylee Nail Spa - Richmond's Premier Luxury Nail Salon</title>
 
+  <!-- Mobile-Specific Meta Tags -->
+  <meta name="theme-color" content="#D8CFC4" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Kaylee Nail Spa" />
+  <meta name="format-detection" content="telephone=yes" />
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="business.business" />
+  <meta property="og:title" content="Kaylee Nail Spa - Richmond's Premier Luxury Nail Salon" />
+  <meta property="og:description"
+    content="Richmond KY's top-rated luxury nail salon. Hospital-grade clean. Expert manicures, pedicures, gel nails." />
+  <meta property="og:url" content="https://kayleenailspa.com" />
+  <meta property="og:image" content="https://kayleenailspa.com/images/hero-bg.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="business:contact_data:street_address" content="202 Wayne Dr, Suite 1" />
+  <meta property="business:contact_data:locality" content="Richmond" />
+  <meta property="business:contact_data:region" content="KY" />
+  <meta property="business:contact_data:postal_code" content="40475" />
+  <meta property="business:contact_data:country_name" content="USA" />
+
+  <!-- Icons -->
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -412,13 +436,13 @@
         </div>
         <form class="contact-form">
           <div class="form-group">
-            <input type="text" placeholder="Your Name" required />
+            <input type="text" name="name" placeholder="Your Name" autocomplete="name" required />
           </div>
           <div class="form-group">
-            <input type="tel" placeholder="Phone (e.g. 859-353-5541)" required />
+            <input type="tel" name="phone" placeholder="Phone (e.g. 859-353-5541)" autocomplete="tel" required />
           </div>
           <div class="form-group">
-            <textarea placeholder="Preferred Dates & Services..."></textarea>
+            <textarea name="message" placeholder="Preferred Dates & Services..." rows="4"></textarea>
           </div>
           <button type="submit" class="btn-submit">Request Confirmation</button>
         </form>
@@ -426,6 +450,20 @@
     </section>
 
   </main>
+
+  <!-- Mobile Sticky CTA Bar -->
+  <div class="mobile-sticky-cta" id="mobile-sticky-cta">
+    <div class="sticky-cta-content">
+      <a href="tel:8593535541" class="sticky-cta-btn sticky-cta-primary" aria-label="Call Kaylee Nail Spa">
+        <span class="cta-icon">📞</span>
+        <span class="cta-text">Call Now</span>
+      </a>
+      <a href="#services" class="sticky-cta-btn sticky-cta-secondary" aria-label="View Services">
+        <span class="cta-icon">✨</span>
+        <span class="cta-text">Services</span>
+      </a>
+    </div>
+  </div>
 
   <footer class="site-footer">
     <div class="container footer-grid">
@@ -455,7 +493,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p class="copyright">&copy; 2026 Kaylee Nail Spa. All rights reserved. <br> Developed by Fauzan Baig</p>
+      <p class="copyright">&copy; 2026 Kaylee Nail Spa. All rights reserved. <br> </p>
     </div>
   </footer>
 
